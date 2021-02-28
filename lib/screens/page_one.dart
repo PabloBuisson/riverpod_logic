@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../main.dart';
 import 'page_two.dart';
-import '../data/mood.dart';
 
 class PageOne extends StatefulWidget {
   PageOne({Key key}) : super(key: key);
@@ -11,14 +12,7 @@ class PageOne extends StatefulWidget {
 }
 
 class _PageOneState extends State<PageOne> {
-  Mood myMood;
   bool displayForm = false;
-
-  @override
-  void initState() {
-    super.initState();
-    myMood = Mood(); //TODO: get Mood Notifier
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +26,40 @@ class _PageOneState extends State<PageOne> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        myMood.emoji ?? "😁",
-                        textScaleFactor: 2.0,
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        myMood.name ?? "My mood",
-                        textScaleFactor: 2.0,
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 20.0),
-                  Container(
-                      color: Colors.grey[200],
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(myMood.comment ??
-                          "Why I'm feeling this mood",
-                        style: TextStyle(color: Colors.grey[700]),
-                      )),
-                ],
-              ),
+              /// 3) create a Consumer
+              Consumer(builder: (context, watch, child) {
+                final state = watch(moodProvider.state);
+                return Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          /// 4) watch the state of the provider
+                          /// to display changes
+                          state.emoji ?? "😁",
+                          textScaleFactor: 2.0,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          state.name ?? "My mood",
+                          textScaleFactor: 2.0,
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 20.0),
+                    Container(
+                        color: Colors.grey[200],
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          state.comment ?? "Why I'm feeling this mood",
+                          style: TextStyle(color: Colors.grey[700]),
+                        )),
+                  ],
+                );
+              }),
               SizedBox(
                 height: 30.0,
               ),
@@ -90,11 +90,16 @@ class _PageOneState extends State<PageOne> {
                           return PageTwo();
                         },
                       ),
-                    ),
+                    ).then((value) => setState(() {
+                          // refresh page (and display changes) on Navigator.pop()
+                          displayForm = false;
+                        })),
                   ),
                 ],
               ),
-              SizedBox(height: 30.0,),
+              SizedBox(
+                height: 30.0,
+              ),
               Visibility(
                 visible: displayForm,
                 child: Padding(
@@ -105,7 +110,8 @@ class _PageOneState extends State<PageOne> {
                         keyboardType: TextInputType.text,
                         onChanged: (String value) {
                           setState(() {
-                            myMood.emoji = value;
+                            /// 5) read the provider to change the state
+                            context.read(moodProvider).emoji = value;
                           });
                         },
                         decoration: InputDecoration(
@@ -116,7 +122,7 @@ class _PageOneState extends State<PageOne> {
                         keyboardType: TextInputType.text,
                         onChanged: (String value) {
                           setState(() {
-                            myMood.name = value;
+                            context.read(moodProvider).name = value;
                           });
                         },
                         decoration: InputDecoration(
@@ -127,7 +133,7 @@ class _PageOneState extends State<PageOne> {
                         keyboardType: TextInputType.text,
                         onChanged: (String value) {
                           setState(() {
-                            myMood.comment = value;
+                            context.read(moodProvider).comment = value;
                           });
                         },
                         decoration: InputDecoration(
@@ -149,9 +155,5 @@ class _PageOneState extends State<PageOne> {
     setState(() {
       displayForm = !displayForm;
     });
-  }
-
-  submitChanges() {
-    Mood myNewMood = myMood;
   }
 }
