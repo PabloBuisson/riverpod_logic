@@ -100,53 +100,49 @@ class _PageOneState extends State<PageOne> {
               SizedBox(
                 height: 30.0,
               ),
-              Consumer(
-                builder: (context, watch, child) {
-                  return Visibility(
-                    visible: displayForm,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: Column(
-                        children: [
-                          TextField(
-                            keyboardType: TextInputType.text,
-                            onChanged: (String value) {
-                              setState(() {
-                                /// 5) read the provider to change the state
-                                context.read(moodProvider).emoji = value;
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: "Enter an emoji",
-                            ),
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.text,
-                            onChanged: (String value) {
-                              setState(() {
-                                context.read(moodProvider).name = value;
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: "Enter a mood",
-                            ),
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.text,
-                            onChanged: (String value) {
-                              setState(() {
-                                context.read(moodProvider).comment = value;
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: "Enter a comment about your mood",
-                            ),
-                          ),
-                        ],
+              Visibility(
+                visible: displayForm,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        keyboardType: TextInputType.text,
+                        onChanged: (String value) {
+                          setState(() {
+                            /// 5) read the provider to change the state
+                            context.read(moodProvider).emoji = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Enter an emoji",
+                        ),
                       ),
-                    ),
-                  );
-                },
+                      TextField(
+                        keyboardType: TextInputType.text,
+                        onChanged: (String value) {
+                          setState(() {
+                            context.read(moodProvider).name = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Enter a mood",
+                        ),
+                      ),
+                      TextField(
+                        keyboardType: TextInputType.text,
+                        onChanged: (String value) {
+                          setState(() {
+                            context.read(moodProvider).comment = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Enter a comment about your mood",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
