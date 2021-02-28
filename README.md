@@ -16,6 +16,7 @@ Simple projet Flutter axé sur l'utilisation de Riverpod et de son StateNotifier
 * C'est ce que propose Riverpod avec son **StateNotifier** : un objet que l'on écoute et que l'on peut modifier en temps réel.
 * Pour le projet, l'objet ``Mood(name, emoji, comment)`` est partagé entre deux pages. A chaque fois que je change mon humeur dans une page (c'est-à-dire à chaque fois que je modifie l'objet Mood), mon humeur sera partagée dans toute l'application.
 * En images :
+
 Page 1 → | Page 2  →
 ------------- | -------------
 <img width="327" alt="Change mood to happy on page one" src="https://user-images.githubusercontent.com/41048008/109427326-31d4ac80-79f2-11eb-8f19-87a496bcfe39.png"> | <img width="325" alt="Display happy mood on page two" src="https://user-images.githubusercontent.com/41048008/109427337-41ec8c00-79f2-11eb-8562-472a158a6506.png">
