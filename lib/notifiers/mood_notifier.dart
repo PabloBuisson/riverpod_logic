@@ -13,7 +13,9 @@ class MoodNotifier extends StateNotifier<Mood> {
 
   /// Change the state of the main mood
   void update(Mood newMood) {
-    state = newMood;
+    if (newMood != state) {
+      state = newMood;
+    }
   }
 
   /// Change the emoji of the main mood
