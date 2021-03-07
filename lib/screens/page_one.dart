@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../main.dart';
+import '../providers.dart';
 import 'page_two.dart';
 
 class PageOne extends StatefulWidget {
@@ -78,7 +78,7 @@ class _PageOneState extends State<PageOne> {
                     width: 10.0,
                   ),
                   ElevatedButton(
-                    child: Text("Next page"),
+                    child: Text("Second page"),
                     style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).primaryColor,
                       onPrimary: Colors.white,
