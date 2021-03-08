@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:riverpod_logic/data/mood.dart';
+import '../data/mood.dart';
 
 /// 0) add a notifier targeting the main object
 class MoodNotifier extends StateNotifier<Mood> {

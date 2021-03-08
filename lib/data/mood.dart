@@ -5,7 +5,7 @@ class Mood {
 
   Mood({this.name, this.emoji, this.comment});
 
-  /// permet de vérifier si deux objets sont égaux (mais non identiques)
+  /// Allows to check if two objects are the same (but not identicals)
   @override
   bool operator ==(other) {
     return (other is Mood)
@@ -14,9 +14,8 @@ class Mood {
         && other.comment == comment;
   }
 
-  /// modification obligatoire suite à la modification de l'operator ==
-  /// utilise l'opérateur BITWISE XOR
+  /// Mandatory change since we change the behavior of the == operator
+  /// Use BITWISE XOR operator
   @override
   int get hashCode => name.hashCode ^ emoji.hashCode ^ comment.hashCode;
-
 }
