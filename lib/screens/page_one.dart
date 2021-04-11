@@ -28,7 +28,7 @@ class _PageOneState extends State<PageOne> {
             children: [
               /// 3) create a Consumer
               Consumer(builder: (context, watch, child) {
-                final state = watch(moodProvider.state);
+                final state = watch(moodProvider);
                 return Column(
                   children: [
                     Row(
@@ -111,7 +111,7 @@ class _PageOneState extends State<PageOne> {
                         onChanged: (String value) {
                           setState(() {
                             /// 5) read the provider to change the state
-                            context.read(moodProvider).emoji = value;
+                            context.read(moodProvider.notifier).emoji = value;
                           });
                         },
                         decoration: InputDecoration(
@@ -122,7 +122,7 @@ class _PageOneState extends State<PageOne> {
                         keyboardType: TextInputType.text,
                         onChanged: (String value) {
                           setState(() {
-                            context.read(moodProvider).name = value;
+                            context.read(moodProvider.notifier).name = value;
                           });
                         },
                         decoration: InputDecoration(
@@ -133,7 +133,7 @@ class _PageOneState extends State<PageOne> {
                         keyboardType: TextInputType.text,
                         onChanged: (String value) {
                           setState(() {
-                            context.read(moodProvider).comment = value;
+                            context.read(moodProvider.notifier).comment = value;
                           });
                         },
                         decoration: InputDecoration(

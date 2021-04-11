@@ -26,7 +26,7 @@ class _PageTwoState extends State<PageTwo> {
         child: SingleChildScrollView(
           child: Consumer(
             builder: (context, watch, child) {
-              final state = watch(moodProvider.state);
+              final state = watch(moodProvider);
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,7 +97,7 @@ class _PageTwoState extends State<PageTwo> {
                             keyboardType: TextInputType.text,
                             onChanged: (String value) {
                               setState(() {
-                                context.read(moodProvider).emoji = value;
+                                context.read(moodProvider.notifier).emoji = value;
                               });
                             },
                             decoration: InputDecoration(
@@ -108,7 +108,7 @@ class _PageTwoState extends State<PageTwo> {
                             keyboardType: TextInputType.text,
                             onChanged: (String value) {
                               setState(() {
-                                context.read(moodProvider).name = value;
+                                context.read(moodProvider.notifier).name = value;
                               });
                             },
                             decoration: InputDecoration(
@@ -119,7 +119,7 @@ class _PageTwoState extends State<PageTwo> {
                             keyboardType: TextInputType.text,
                             onChanged: (String value) {
                               setState(() {
-                                context.read(moodProvider).comment = value;
+                                context.read(moodProvider.notifier).comment = value;
                               });
                             },
                             decoration: InputDecoration(
